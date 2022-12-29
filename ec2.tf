@@ -18,6 +18,7 @@ resource "aws_instance" "Controller" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
     instance_type = "${var.INSTANCE_TYPE}"
     vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+    user_data = "hostnamectl set-hostname Controller"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
      network_interface_id = "${aws_network_interface.Controller.id}"
@@ -42,6 +43,7 @@ resource "aws_instance" "Storage" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
     instance_type = "${var.INSTANCE_TYPE}"
     vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+    user_data = "hostnamectl set-hostname Storage"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
      network_interface_id = "${aws_network_interface.Storage.id}"
@@ -66,6 +68,7 @@ resource "aws_instance" "Compute" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
     instance_type = "${var.INSTANCE_TYPE}"
     vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
+    user_data = "hostnamectl set-hostname Compute"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
      network_interface_id = "${aws_network_interface.Compute.id}"
