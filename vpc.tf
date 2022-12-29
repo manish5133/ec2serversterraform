@@ -46,3 +46,9 @@ resource "aws_route_table_association" "openstack-crta-public-subnet"{
     subnet_id = "${aws_subnet.openstack-subnet-public.id}"
     route_table_id = "${aws_route_table.openstack-public-crt.id}"
 }
+
+#vpc_peering
+resource "aws_vpc_peering_connection" "openstack-vpc-peering" {
+  peer_vpc_id   = aws_vpc.openstack-vpc.id
+  vpc_id        = aws_vpc.AnsibleServer.id
+}
