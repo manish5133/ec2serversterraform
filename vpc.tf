@@ -55,6 +55,6 @@ resource "aws_route_table_association" "openstack-crta-public-subnet"{
 #vpc_peering
 resource "aws_vpc_peering_connection" "openstack-vpc-peering" {
   peer_vpc_id   = aws_vpc.openstack-vpc.id
-  vpc_id        = aws_vpc.AnsibleServer.id
+  vpc_id        = "vpc-0b429a3f071175baf"
   auto_accept = true  
 }
