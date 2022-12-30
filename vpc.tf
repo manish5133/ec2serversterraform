@@ -39,7 +39,8 @@ resource "aws_route_table" "openstack-public-crt" {
     
     route {
         cidr_block = "192.168.1.0/24"
-        
+        vpc_peering_connection_id = "${aws_vps_peering_connection.openstack-vpc-peering.id}"
+    }        
     
     tags = {
         Name = "openstack-public-crt"
