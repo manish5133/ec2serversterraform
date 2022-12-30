@@ -9,7 +9,7 @@ resource "aws_key_pair" "openstack-key" {
 resource "aws_network_interface" "Controller" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
   private_ips = ["10.194.100.11"]
-  tags {
+  tags = {
     Name = "primary_network_interface_controller"
   }
 }
@@ -34,7 +34,7 @@ resource "aws_instance" "Controller" {
 resource "aws_network_interface" "Storage" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
   private_ips = ["10.194.100.12"]
-  tags {
+  tags = {
     Name = "primary_network_interface_storage"
   }
 }
@@ -59,7 +59,7 @@ resource "aws_instance" "Storage" {
 resource "aws_network_interface" "Compute" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
   private_ips = ["10.194.100.13"]
-  tags {
+  tags = {
     Name = "primary_network_interface_compute"
   }
 }
