@@ -37,6 +37,10 @@ resource "aws_route_table" "openstack-public-crt" {
         gateway_id = "${aws_internet_gateway.openstack-igw.id}" 
     }
     
+    route {
+        cidr_block = "192.168.1.0/24"
+        
+    
     tags = {
         Name = "openstack-public-crt"
     }
@@ -51,4 +55,5 @@ resource "aws_route_table_association" "openstack-crta-public-subnet"{
 resource "aws_vpc_peering_connection" "openstack-vpc-peering" {
   peer_vpc_id   = aws_vpc.openstack-vpc.id
   vpc_id        = aws_vpc.AnsibleServer.id
+  auto_accept = true  
 }
