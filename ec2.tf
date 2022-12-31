@@ -9,6 +9,7 @@ resource "aws_key_pair" "openstack-key" {
 resource "aws_network_interface" "Controller" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
   private_ips = ["10.194.100.11"]
+  private_dns_name = ["Controller"]
   security_groups = ["${aws_security_group.ssh-allowed.id}"]
   tags = {
     Name = "primary_network_interface_controller"
@@ -33,6 +34,7 @@ resource "aws_instance" "Controller" {
 resource "aws_network_interface" "Storage" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
   private_ips = ["10.194.100.12"]
+  private_dns_name = ["Storage"]  
   security_groups = ["${aws_security_group.ssh-allowed.id}"]
   tags = {
     Name = "primary_network_interface_storage"
@@ -67,6 +69,7 @@ resource "aws_instance" "Compute" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
+    private_dns_name = ["Compute"]  
     network_interface {
      network_interface_id = "${aws_network_interface.Compute.id}"
      device_index = 0
