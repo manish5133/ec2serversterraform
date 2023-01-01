@@ -17,6 +17,11 @@ resource "aws_network_interface" "Controller" {
 
 resource "aws_instance" "Controller" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
+    root_block_device {
+     volume_size = 60
+     volume_type = "gp2"
+     delete_on_termination = true
+    }
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
@@ -41,6 +46,11 @@ resource "aws_network_interface" "Storage" {
 
 resource "aws_instance" "Storage" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
+    root_block_device {
+     volume_size = 60
+     volume_type = "gp2"
+     delete_on_termination = true
+    }
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
@@ -65,6 +75,11 @@ resource "aws_network_interface" "Compute" {
 
 resource "aws_instance" "Compute" {
     ami = "${lookup(var.AMI, var.AWS_REGION)}"
+    root_block_device {
+     volume_size = 60
+     volume_type = "gp2"
+     delete_on_termination = true
+    }
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
