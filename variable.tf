@@ -16,5 +16,5 @@ variable "PUBLIC_KEY_PATH" {
 }
 
 variable "INSTANCE_TYPE" {
-     default = "t2.micro"
+     default = "t2.medium"
 }
