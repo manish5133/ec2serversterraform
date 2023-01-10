@@ -22,7 +22,6 @@ resource "aws_instance" "Controller" {
      volume_type = "gp2"
      delete_on_termination = true
     }
-    availability_zone = "${var.AZ}"
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
@@ -52,7 +51,11 @@ resource "aws_instance" "Storage" {
      volume_type = "gp2"
      delete_on_termination = true
     }
-    availability_zone = "${var.AZ}"
+    ebs_block_device {
+     volume_size = 100
+     volume_type = "gp2"
+     delete_on_termination = true
+    }
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
@@ -63,16 +66,7 @@ resource "aws_instance" "Storage" {
         Name: "Storage"
     }
 }
-resource "aws_ebs_volume" "storage_sdb" {
-  size              = 100
-  availability_zone = "${var.AZ}"  
-}
 
-resource "aws_volume_attachment" "storage_sdb" {
-  device_name = "/dev/sdh"
-  volume_id   = aws_ebs_volume.storage_sdb.id
-  instance_id = aws_instance.Storage.id
-}
 
 #Create EC2 VM Compute.tf
 resource "aws_network_interface" "Compute" {
@@ -91,7 +85,6 @@ resource "aws_instance" "Compute" {
      volume_type = "gp2"
      delete_on_termination = true
     }
-    availability_zone = "${var.AZ}"
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
