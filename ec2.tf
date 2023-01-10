@@ -61,7 +61,15 @@ resource "aws_instance" "Storage" {
         Name: "Storage"
     }
 }
+resource "aws_ebs_volume" "storage_sdb" {
+  size              = 100
+}
 
+resource "aws_volume_attachment" "storage_sdb" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.storage_sdb.id
+  instance_id = aws_instance.Storage.id
+}
 
 #Create EC2 VM Compute.tf
 resource "aws_network_interface" "Compute" {
