@@ -18,7 +18,3 @@ variable "PUBLIC_KEY_PATH" {
 variable "INSTANCE_TYPE" {
      default = "t2.medium"
 }
-
-variable "AZ" {
-    default = "us-east-1a"
-}
