@@ -22,6 +22,7 @@ resource "aws_instance" "Controller" {
      volume_type = "gp2"
      delete_on_termination = true
     }
+    availability_zone = "${var.AZ}"
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
@@ -51,6 +52,7 @@ resource "aws_instance" "Storage" {
      volume_type = "gp2"
      delete_on_termination = true
     }
+    availability_zone = "${var.AZ}"
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
@@ -63,6 +65,7 @@ resource "aws_instance" "Storage" {
 }
 resource "aws_ebs_volume" "storage_sdb" {
   size              = 100
+  availability_zone = "${var.AZ}"  
 }
 
 resource "aws_volume_attachment" "storage_sdb" {
@@ -88,6 +91,7 @@ resource "aws_instance" "Compute" {
      volume_type = "gp2"
      delete_on_termination = true
     }
+    availability_zone = "${var.AZ}"
     instance_type = "${var.INSTANCE_TYPE}"
     key_name = "${aws_key_pair.openstack-key.id}"
     network_interface {
