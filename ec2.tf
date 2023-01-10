@@ -8,8 +8,7 @@ resource "aws_key_pair" "openstack-key" {
 #Create EC2 VM Controller.tf
 resource "aws_network_interface" "Controller" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
-  private_ips = ["10.194.100.11"]
-  availability_zone = "${var.AZ}"  
+  private_ips = ["10.194.100.11"] 
   security_groups = ["${aws_security_group.ssh-allowed.id}"]
   tags = {
     Name = "primary_network_interface_controller"
@@ -39,8 +38,7 @@ resource "aws_instance" "Controller" {
 #Create EC2 VM Storage.tf
 resource "aws_network_interface" "Storage" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
-  private_ips = ["10.194.100.12"]  
-  availability_zone = "${var.AZ}"
+  private_ips = ["10.194.100.12"]
   security_groups = ["${aws_security_group.ssh-allowed.id}"]
   tags = {
     Name = "primary_network_interface_storage"
@@ -79,8 +77,7 @@ resource "aws_volume_attachment" "storage_sdb" {
 #Create EC2 VM Compute.tf
 resource "aws_network_interface" "Compute" {
   subnet_id = "${aws_subnet.openstack-subnet-public.id}"
-  private_ips = ["10.194.100.13"]
-  availability_zone = "${var.AZ}"  
+  private_ips = ["10.194.100.13"] 
   security_groups = ["${aws_security_group.ssh-allowed.id}"]
   tags =  {
     Name = "primary_network_interface_compute"
