@@ -56,7 +56,7 @@ resource "aws_route" "openstack-r"{
 }
 
 resource "aws_route" "ansible-r"{
-    route_table_id = "rtb-0501f2fe9f7b2d321"
+    route_table_id = "rtb-09612ceb1592333bf"
     destination_cidr_block = "10.194.0.0/16"
     vpc_peering_connection_id = "${aws_vpc_peering_connection.openstack-vpc-peering.id}"
 }
