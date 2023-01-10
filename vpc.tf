@@ -12,7 +12,6 @@ resource "aws_vpc" "openstack-vpc" {
 
 resource "aws_subnet" "openstack-subnet-public" {
     vpc_id = "${aws_vpc.openstack-vpc.id}"
-    availability_zone = "${var.AZ}"
     cidr_block = "10.194.100.0/24"
     map_public_ip_on_launch = "true"
     #availability_zone = "${var.AWS_REGION}"
