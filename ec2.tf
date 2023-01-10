@@ -52,7 +52,7 @@ resource "aws_instance" "Storage" {
      delete_on_termination = true
     }
     ebs_block_device {
-     device_name" : "/dev/xvdb"
+     device_name = "/dev/xvdb"
      volume_size = 100
      volume_type = "gp2"
      delete_on_termination = true
